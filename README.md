@@ -1,8 +1,8 @@
-# 甜蜜订单 Sweet Order
+# 云朵小铺 cloud-store
 
 ## 项目名称
 
-甜蜜订单 Sweet Order
+云朵小铺 cloud-store
 
 ## 产品定位
 
