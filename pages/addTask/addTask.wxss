@@ -1,0 +1,60 @@
+.add-task-page {
+  padding-bottom: calc(80rpx + env(safe-area-inset-bottom));
+}
+
+.hero-card {
+  border-radius: 46rpx;
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--color-mint) 54%, var(--color-primary-light) 100%);
+}
+
+.form-card {
+  margin-top: 26rpx;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16rpx;
+  margin-top: 18rpx;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  margin-top: 18rpx;
+}
+
+.field-label {
+  color: var(--color-text);
+  font-size: 25rpx;
+  font-weight: 900;
+}
+
+.field-input,
+.picker-box {
+  min-height: 78rpx;
+  padding: 0 22rpx;
+  font-size: 25rpx;
+  line-height: 78rpx;
+}
+
+.submit-button {
+  display: flex;
+  min-height: 82rpx;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24rpx;
+  border-radius: 999rpx;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-size: 28rpx;
+  font-weight: 900;
+  box-shadow: var(--shadow-pink);
+}
+
+@media (max-width: 340px) {
+  .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

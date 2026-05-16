@@ -1,0 +1,51 @@
+<sweet-nav title="心动相册" show-back="{{true}}" />
+
+<view class="page album-page">
+  <view class="card album-hero">
+    <view>
+      <view class="page-title">心动相册 📷</view>
+      <view class="page-subtitle">把想反复看的瞬间，收进两个人的小柜台。</view>
+    </view>
+    <view class="hero-count">
+      <view class="hero-value">{{photos.length}}</view>
+      <view class="hero-label">张照片</view>
+    </view>
+  </view>
+
+  <view wx:if="{{coverPhoto}}" class="cover-card">
+    <image class="cover-image" src="{{coverPhoto.displayImagePath}}" mode="aspectFill" />
+    <view class="cover-mask">
+      <view class="cover-title">相册封面</view>
+      <view class="cover-note">{{coverPhoto.note || "今天也有值得收藏的小瞬间"}}</view>
+    </view>
+  </view>
+
+  <button class="add-entry-button" bindtap="goAddPhoto">＋ 新增照片</button>
+
+  <view wx:if="{{photos.length === 0}}" class="card empty-card album-empty">
+    相册还空着，第一张照片会成为这个小空间的封面。
+  </view>
+
+  <view wx:else class="photo-list">
+    <view wx:for="{{photos}}" wx:key="id" class="card photo-card">
+      <image class="photo-image" src="{{item.displayImagePath}}" mode="aspectFill" lazy-load="{{true}}" />
+      <view class="photo-body">
+        <view class="photo-top">
+          <view class="photo-date">{{item.dateText}}</view>
+          <view wx:if="{{item.isCover}}" class="photo-badge">封面</view>
+        </view>
+        <view class="photo-note">{{item.note || "没有备注，但这一刻被好好存下来了。"}}</view>
+        <view class="photo-meta">
+          <view class="meta-pill">{{item.tag}}</view>
+          <view wx:if="{{item.location}}" class="meta-pill">{{item.location}}</view>
+          <view class="meta-pill">{{item.uploader}}</view>
+        </view>
+        <view class="photo-actions">
+          <button class="small-button" data-id="{{item.id}}" bindtap="toggleFavorite">{{item.favoriteText}}</button>
+          <button class="small-button" data-id="{{item.id}}" bindtap="setCover">设封面</button>
+          <button class="small-button ghost-button" data-id="{{item.id}}" bindtap="deletePhoto">删除</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

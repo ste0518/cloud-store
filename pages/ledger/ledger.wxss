@@ -1,0 +1,220 @@
+.ledger-page {
+  padding-bottom: calc(150rpx + env(safe-area-inset-bottom));
+}
+
+.balance-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24rpx;
+  border-radius: 46rpx;
+  background: linear-gradient(135deg, var(--color-card) 0%, var(--color-primary-light) 56%, var(--color-warm) 100%);
+}
+
+.balance-box {
+  flex: 0 0 160rpx;
+  padding: 18rpx 14rpx;
+  border-radius: 28rpx;
+  background: #FFFFFF;
+  text-align: center;
+  box-shadow: 0 8rpx 0 rgba(255, 158, 187, 0.16), 0 10rpx 24rpx rgba(255, 158, 187, 0.12);
+}
+
+.balance-value {
+  color: var(--color-primary);
+  font-size: 48rpx;
+  font-weight: 900;
+}
+
+.balance-label {
+  color: var(--color-muted);
+  font-size: 23rpx;
+}
+
+.form-card,
+.quick-form-card,
+.quick-section,
+.history-section {
+  margin-top: 26rpx;
+}
+
+.section-title {
+  color: var(--color-text);
+  font-size: 30rpx;
+  font-weight: 900;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.reason-field {
+  margin-top: 18rpx;
+}
+
+.field-label {
+  color: var(--color-text);
+  font-size: 26rpx;
+  font-weight: 800;
+}
+
+.field-input,
+.picker-box {
+  width: 100%;
+  min-height: 78rpx;
+  padding: 0 22rpx;
+  border: 1rpx solid rgba(255, 158, 187, 0.2);
+  border-radius: 22rpx;
+  background: var(--color-cream);
+  color: var(--color-text);
+  font-size: 26rpx;
+  line-height: 78rpx;
+}
+
+.submit-button {
+  display: flex;
+  min-height: 82rpx;
+  align-items: center;
+  justify-content: center;
+  margin-top: 22rpx;
+  border-radius: 999rpx;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-size: 28rpx;
+  font-weight: 900;
+  box-shadow: 0 12rpx 24rpx rgba(255, 158, 187, 0.2);
+}
+
+.soft-submit-button {
+  background: var(--color-primary-light);
+  color: var(--color-text);
+  box-shadow: 0 8rpx 0 rgba(255, 158, 187, 0.18);
+}
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+
+.quick-action-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.quick-button {
+  display: flex;
+  min-height: 80rpx;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16rpx;
+  border-radius: 30rpx;
+  font-size: 25rpx;
+  font-weight: 800;
+}
+
+.quick-delete-button {
+  display: flex;
+  min-height: 54rpx;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid rgba(255, 158, 187, 0.36);
+  border-radius: 999rpx;
+  background: var(--color-card);
+  color: var(--color-muted);
+  font-size: 23rpx;
+  font-weight: 800;
+}
+
+.earn-button {
+  background: var(--color-primary-light);
+  color: var(--color-text);
+}
+
+.deduct-button {
+  background: var(--color-warm);
+  color: var(--color-text);
+}
+
+.empty-card {
+  margin-top: 16rpx;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.quick-empty {
+  padding: 28rpx 24rpx;
+  font-size: 24rpx;
+}
+
+.record-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+
+.record-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18rpx;
+  padding: 24rpx;
+  border-radius: 34rpx;
+}
+
+@media (max-width: 340px) {
+  .balance-card,
+  .record-card {
+    gap: 14rpx;
+  }
+
+  .form-grid,
+  .quick-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+}
+
+.record-left {
+  min-width: 0;
+  flex: 1;
+}
+
+.record-reason {
+  color: var(--color-text);
+  font-size: 28rpx;
+  font-weight: 900;
+}
+
+.record-meta {
+  margin-top: 6rpx;
+  color: var(--color-muted);
+  font-size: 23rpx;
+}
+
+.record-amount {
+  flex: 0 0 auto;
+  font-size: 34rpx;
+  font-weight: 900;
+}
+
+.positive {
+  color: var(--color-text);
+}
+
+.negative {
+  color: var(--color-text);
+}

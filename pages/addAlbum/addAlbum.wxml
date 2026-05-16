@@ -1,0 +1,55 @@
+<sweet-nav title="新增照片" show-back="{{true}}" />
+
+<view class="page add-album-page">
+  <view class="card hero-card">
+    <view class="page-title">新增照片 📷</view>
+    <view class="page-subtitle">选一张想留下的瞬间，给它配上日期、地点和小标签。</view>
+  </view>
+
+  <view class="card form-card">
+    <button class="photo-picker {{form.imagePath ? 'photo-picker-filled' : ''}}" bindtap="choosePhoto">
+      <image wx:if="{{form.imagePath}}" class="picked-image" src="{{form.imagePath}}" mode="aspectFill" />
+      <view wx:else class="picker-placeholder">
+        <view class="picker-icon">＋</view>
+        <view class="picker-text">选择一张照片</view>
+      </view>
+    </button>
+
+    <view class="form-grid">
+      <view class="field">
+        <view class="field-label">日期</view>
+        <picker mode="date" value="{{form.date}}" bindchange="handleDateChange">
+          <view class="picker-box">{{form.date}}</view>
+        </picker>
+      </view>
+      <view class="field">
+        <view class="field-label">上传者</view>
+        <input class="field-input" value="{{form.uploader}}" placeholder="例如：我" data-field="uploader" bindinput="handleInput" />
+      </view>
+    </view>
+
+    <view class="field full-field">
+      <view class="field-label">一句备注</view>
+      <input class="field-input" value="{{form.note}}" placeholder="例如：今天一起吃了火锅，开心。" data-field="note" bindinput="handleInput" />
+    </view>
+
+    <view class="field full-field">
+      <view class="field-label">地点</view>
+      <input class="field-input" value="{{form.location}}" placeholder="例如：家里 / 海边 / 那家咖啡店" data-field="location" bindinput="handleInput" />
+    </view>
+
+    <view class="tag-row">
+      <button
+        wx:for="{{tags}}"
+        wx:key="value"
+        class="tag-pill {{form.tag === item.value ? 'tag-pill-active' : ''}}"
+        data-tag="{{item.value}}"
+        bindtap="chooseTag"
+      >
+        {{item.label}}
+      </button>
+    </view>
+
+    <button class="submit-button" bindtap="addPhoto">收进相册</button>
+  </view>
+</view>

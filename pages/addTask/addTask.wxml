@@ -1,0 +1,46 @@
+<sweet-nav title="添加小任务" show-back="{{true}}" />
+
+<view class="page add-task-page">
+  <view class="card hero-card">
+    <view class="page-title">添加小任务 ✅</view>
+    <view class="page-subtitle">把今天要一起完成的小事写下来，完成后自动奖励云朵币。</view>
+  </view>
+
+  <view class="card form-card">
+    <view class="section-title">任务内容</view>
+    <view class="field">
+      <view class="field-label">任务</view>
+      <input class="field-input" value="{{form.title}}" placeholder="例如：买牛奶 / 倒垃圾 / 一起收拾厨房" data-field="title" bindinput="handleInput" />
+    </view>
+
+    <view class="form-grid">
+      <view class="field">
+        <view class="field-label">类型</view>
+        <picker mode="selector" range="{{typeOptions}}" range-key="label" value="{{form.typeIndex}}" bindchange="handleTypeChange">
+          <view class="picker-box">{{typeOptions[form.typeIndex].label}}</view>
+        </picker>
+      </view>
+      <view class="field">
+        <view class="field-label">谁来做</view>
+        <picker mode="selector" range="{{assigneeOptions}}" range-key="label" value="{{form.assigneeIndex}}" bindchange="handleAssigneeChange">
+          <view class="picker-box">{{assigneeOptions[form.assigneeIndex].label}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="form-grid">
+      <view class="field">
+        <view class="field-label">日期</view>
+        <picker mode="date" value="{{form.dueDate}}" bindchange="handleDateChange">
+          <view class="picker-box">{{form.dueDate}}</view>
+        </picker>
+      </view>
+      <view class="field">
+        <view class="field-label">完成奖励</view>
+        <input class="field-input" type="number" value="{{form.reward}}" placeholder="例如：3" data-field="reward" bindinput="handleInput" />
+      </view>
+    </view>
+
+    <button class="submit-button" bindtap="addTask">加入今日小单</button>
+  </view>
+</view>

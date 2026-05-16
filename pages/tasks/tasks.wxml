@@ -1,0 +1,56 @@
+<sweet-nav title="任务清单" show-back="{{true}}" />
+
+<view class="page tasks-page">
+  <view class="card tasks-hero">
+    <view>
+      <view class="page-title">今日小单 ✅</view>
+      <view class="page-subtitle">不是谁欠谁，是一起让生活轻一点。</view>
+    </view>
+    <view class="task-stats">
+      <view class="task-stat">
+        <view class="stat-value">{{pendingCount}}</view>
+        <view class="stat-label">待完成</view>
+      </view>
+      <view class="task-stat">
+        <view class="stat-value">{{doneCount}}</view>
+        <view class="stat-label">已完成</view>
+      </view>
+    </view>
+  </view>
+
+  <button class="add-entry-button" bindtap="goAddTask">＋ 添加小任务</button>
+
+  <view class="section">
+    <view class="section-title">待完成</view>
+    <view wx:if="{{pendingTasks.length === 0}}" class="card empty-card">
+      当前没有待完成任务，今天可以轻一点。
+    </view>
+    <view wx:else class="task-list">
+      <view wx:for="{{pendingTasks}}" wx:key="id" class="card task-card">
+        <button class="check-button" data-id="{{item.id}}" bindtap="toggleTask"></button>
+        <view class="task-main">
+          <view class="task-title">{{item.icon}} {{item.title}}</view>
+          <view class="task-meta">{{item.assignee}} · {{item.dueDateText}} · +{{item.reward}} 云朵币</view>
+        </view>
+        <button class="delete-button" data-id="{{item.id}}" bindtap="deleteTask">删除</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">已完成</view>
+    <view wx:if="{{doneTasks.length === 0}}" class="card empty-card">
+      完成后会放在这里，也会自动记一笔小奖励。
+    </view>
+    <view wx:else class="task-list">
+      <view wx:for="{{doneTasks}}" wx:key="id" class="card task-card task-card-done">
+        <button class="check-button check-button-done" data-id="{{item.id}}" bindtap="toggleTask">✓</button>
+        <view class="task-main">
+          <view class="task-title">{{item.icon}} {{item.title}}</view>
+          <view class="task-meta">{{item.completedAtText}} 完成 · {{item.assignee}}</view>
+        </view>
+        <button class="delete-button" data-id="{{item.id}}" bindtap="deleteTask">删除</button>
+      </view>
+    </view>
+  </view>
+</view>

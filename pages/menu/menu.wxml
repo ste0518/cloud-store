@@ -1,0 +1,60 @@
+<sweet-nav title="菜单" />
+
+<view class="page menu-page">
+  <view class="menu-header card">
+    <view>
+      <view class="page-title">我的菜单 🍳</view>
+      <view class="page-subtitle">{{isOwner ? ownerSubtitle : '挑一份今天想吃的，轻轻放进小篮子。'}}</view>
+    </view>
+    <view class="header-side">
+      <view class="dish-count">{{filteredDishes.length}} 道</view>
+      <button wx:if="{{isOwner}}" class="add-dish-button" bindtap="goAddDish">添加</button>
+    </view>
+  </view>
+
+  <scroll-view class="category-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="category-list">
+      <button
+        wx:for="{{categoryFilters}}"
+        wx:key="value"
+        class="category-chip {{activeCategory === item.value ? 'category-chip-active' : ''}}"
+        data-value="{{item.value}}"
+        bindtap="changeCategory"
+      >
+        {{item.label}}
+      </button>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{filteredDishes.length === 0}}" class="empty-card card">
+    <view class="empty-icon">🍽️</view>
+    <view class="empty-title">这里暂时空空的</view>
+    <view class="empty-desc">{{isOwner ? '先添加一道拿手菜，再放进今日点单。' : customerEmptyDesc}}</view>
+    <button wx:if="{{isOwner}}" class="empty-action" bindtap="goAddDish">添加一道菜</button>
+  </view>
+
+  <view wx:else class="dish-list">
+    <view wx:for="{{filteredDishes}}" wx:key="id" class="dish-card card">
+      <view class="dish-top">
+        <view class="dish-icon">{{item.icon}}</view>
+        <view class="dish-main">
+          <view class="dish-name">{{item.name}}</view>
+          <view class="dish-desc">{{item.description}}</view>
+        </view>
+      </view>
+
+      <view class="dish-meta">
+        <view class="meta-pill">{{item.categoryText}}</view>
+      </view>
+
+      <view class="dish-actions {{isOwner ? '' : 'dish-actions-single'}}">
+        <button class="cart-button" data-id="{{item.id}}" bindtap="addToCart">
+          加入今日点单
+        </button>
+        <button wx:if="{{isOwner}}" class="delete-button" data-id="{{item.id}}" bindtap="deleteDish">
+          删除
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

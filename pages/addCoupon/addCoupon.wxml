@@ -1,0 +1,72 @@
+<sweet-nav title="添加奖券" show-back="{{true}}" />
+
+<view class="page add-coupon-page">
+  <view class="card hero-card">
+    <view class="page-title">上架奖券 🎟️</view>
+    <view class="page-subtitle">把想兑换的小奖励写清楚，放进两个人的甜蜜货架。</view>
+  </view>
+
+  <view class="card form-card">
+    <view class="section-title">奖券内容</view>
+    <view class="form-grid">
+      <view class="field">
+        <view class="field-label">名称</view>
+        <input
+          class="field-input"
+          value="{{couponForm.title}}"
+          placeholder="例如：免洗碗一次"
+          data-field="title"
+          bindinput="handleCouponInput"
+        />
+      </view>
+      <view class="field">
+        <view class="field-label">emoji</view>
+        <input
+          class="field-input"
+          value="{{couponForm.emoji}}"
+          placeholder="例如：🧋"
+          data-field="emoji"
+          bindinput="handleCouponInput"
+        />
+      </view>
+    </view>
+
+    <view class="field full-field">
+      <view class="field-label">描述</view>
+      <textarea
+        class="field-textarea"
+        value="{{couponForm.description}}"
+        placeholder="写一句兑换后会发生的小幸福"
+        data-field="description"
+        bindinput="handleCouponInput"
+      />
+    </view>
+
+    <view class="form-grid">
+      <view class="field">
+        <view class="field-label">价格</view>
+        <input
+          class="field-input"
+          type="number"
+          value="{{couponForm.cost}}"
+          placeholder="例如：12"
+          data-field="cost"
+          bindinput="handleCouponInput"
+        />
+      </view>
+      <view class="field">
+        <view class="field-label">库存</view>
+        <input
+          class="field-input"
+          type="number"
+          value="{{couponForm.stock}}"
+          placeholder="例如：1"
+          data-field="stock"
+          bindinput="handleCouponInput"
+        />
+      </view>
+    </view>
+
+    <button class="submit-button" bindtap="addCoupon">上架奖券</button>
+  </view>
+</view>

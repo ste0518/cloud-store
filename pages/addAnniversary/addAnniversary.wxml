@@ -1,0 +1,44 @@
+<sweet-nav title="添加纪念日" show-back="{{true}}" />
+
+<view class="page add-anniversary-page">
+  <view class="card hero-card">
+    <view class="page-title">收进纪念日 🗓️</view>
+    <view class="page-subtitle">把重要日子单独记下来，之后首页和纪念日页都会提醒你。</view>
+  </view>
+
+  <view class="card form-card">
+    <view class="section-title">纪念日信息</view>
+    <view class="form-grid">
+      <view class="field">
+        <view class="field-label">名称</view>
+        <input class="field-input" value="{{form.title}}" placeholder="例如：在一起纪念日" data-field="title" bindinput="handleInput" />
+      </view>
+      <view class="field">
+        <view class="field-label">日期</view>
+        <picker mode="date" value="{{form.date}}" bindchange="handleDateChange">
+          <view class="picker-box">{{form.date}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="form-grid">
+      <view class="field">
+        <view class="field-label">类型</view>
+        <picker mode="selector" range="{{typeOptions}}" range-key="label" value="{{form.typeIndex}}" bindchange="handleTypeChange">
+          <view class="picker-box">{{typeOptions[form.typeIndex].label}}</view>
+        </picker>
+      </view>
+      <view class="field">
+        <view class="field-label">小图标</view>
+        <input class="field-input" value="{{form.icon}}" placeholder="例如：💗" data-field="icon" bindinput="handleInput" />
+      </view>
+    </view>
+
+    <view class="field full-field">
+      <view class="field-label">备注</view>
+      <input class="field-input" value="{{form.remark}}" placeholder="例如：记得提前准备小惊喜" data-field="remark" bindinput="handleInput" />
+    </view>
+
+    <button class="submit-button" bindtap="addAnniversary">收进纪念日</button>
+  </view>
+</view>

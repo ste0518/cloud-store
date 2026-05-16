@@ -1,0 +1,75 @@
+<sweet-nav title="情侣档案" show-back="{{true}}" />
+
+<view class="page profile-page">
+  <view class="card profile-hero">
+    <view>
+      <view class="page-title">情侣档案 💞</view>
+      <view class="page-subtitle">把偏好、雷区和安慰方式记下来，日常就少一点猜。</view>
+    </view>
+    <view class="profile-icon">📒</view>
+  </view>
+
+  <view class="segment-card">
+    <button class="segment-button {{activeRole === 'me' ? 'segment-button-active' : ''}}" data-role="me" bindtap="switchRole">我的档案</button>
+    <button class="segment-button {{activeRole === 'partner' ? 'segment-button-active' : ''}}" data-role="partner" bindtap="switchRole">{{partnerProfileText}}</button>
+  </view>
+
+  <view class="card form-card">
+    <view class="section-title">{{activeRoleText}}</view>
+
+    <view class="field">
+      <view class="field-label">称呼</view>
+      <input class="field-input" value="{{currentProfile.name}}" placeholder="例如：小王 / 小乖 / 宝宝" data-field="name" bindinput="handleInput" />
+    </view>
+
+    <view class="form-grid">
+      <view class="field">
+        <view class="field-label">喜欢吃</view>
+        <textarea class="field-textarea" value="{{currentProfile.likes}}" placeholder="热汤、甜品、牛肉面" data-field="likes" bindinput="handleInput" />
+      </view>
+      <view class="field">
+        <view class="field-label">不喜欢</view>
+        <textarea class="field-textarea" value="{{currentProfile.dislikes}}" placeholder="香菜、太辣、临时改变计划" data-field="dislikes" bindinput="handleInput" />
+      </view>
+    </view>
+
+    <view class="form-grid">
+      <view class="field">
+        <view class="field-label">奶茶/饮料</view>
+        <textarea class="field-textarea" value="{{currentProfile.drinks}}" placeholder="少冰三分糖、热饮优先" data-field="drinks" bindinput="handleInput" />
+      </view>
+      <view class="field">
+        <view class="field-label">小惊喜</view>
+        <textarea class="field-textarea" value="{{currentProfile.surprises}}" placeholder="一束花、一杯奶茶、一个抱抱" data-field="surprises" bindinput="handleInput" />
+      </view>
+    </view>
+
+    <view class="field">
+      <view class="field-label">压力大时希望怎么被对待</view>
+      <textarea class="field-textarea long-textarea" value="{{currentProfile.comfort}}" placeholder="例如：先抱抱，不要马上讲道理，可以帮我做一个决定。" data-field="comfort" bindinput="handleInput" />
+    </view>
+
+    <view class="field">
+      <view class="field-label">生气/低落时不喜欢什么</view>
+      <textarea class="field-textarea long-textarea" value="{{currentProfile.avoid}}" placeholder="例如：不要冷处理，不要一直追问，不要临时取消计划。" data-field="avoid" bindinput="handleInput" />
+    </view>
+
+    <view class="field">
+      <view class="field-label">喜欢的约会/电影/花</view>
+      <textarea class="field-textarea long-textarea" value="{{currentProfile.dateIdeas}}" placeholder="例如：公园散步、喜剧片、向日葵。" data-field="dateIdeas" bindinput="handleInput" />
+    </view>
+
+    <button class="submit-button" bindtap="saveProfileCard">保存档案</button>
+  </view>
+
+  <view class="section">
+    <view class="section-title">快速查看</view>
+    <view class="summary-grid">
+      <view wx:for="{{summaryCards}}" wx:key="title" class="summary-card">
+        <view class="summary-icon">{{item.icon}}</view>
+        <view class="summary-title">{{item.title}}</view>
+        <view class="summary-text">{{item.text}}</view>
+      </view>
+    </view>
+  </view>
+</view>

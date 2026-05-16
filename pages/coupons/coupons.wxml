@@ -1,0 +1,67 @@
+<sweet-nav title="奖券" />
+
+<view class="page coupons-page">
+  <view class="card coupons-hero">
+    <view>
+      <view class="page-title">奖券商店 🎟️</view>
+      <view class="page-subtitle">把两个人的小奖励，慢慢放进货架。</view>
+    </view>
+    <view class="wallet-chip">
+      <view class="wallet-value">{{wallet.balance}}</view>
+      <view class="wallet-label">云朵币</view>
+    </view>
+  </view>
+
+  <button class="add-entry-button" bindtap="goAddCoupon">＋ 上架新奖券</button>
+
+  <view wx:if="{{coupons.length === 0}}" class="card empty-card coupon-empty">
+    奖券货架还空着，先上架一张两个人都认可的小奖励吧。
+  </view>
+
+  <view wx:else class="coupon-list">
+    <view wx:for="{{coupons}}" wx:key="id" class="card coupon-card">
+      <view class="coupon-icon">{{item.emoji}}</view>
+      <view class="coupon-main">
+        <view class="coupon-title">{{item.title}}</view>
+        <view class="coupon-desc">{{item.description}}</view>
+        <view class="coupon-meta">
+          <view class="meta-pill">{{item.cost}} 云朵币</view>
+          <view class="meta-pill">剩余 {{item.stock}}</view>
+        </view>
+      </view>
+      <view class="coupon-actions">
+        <button
+          class="exchange-button {{item.disabled ? 'exchange-button-disabled' : ''}}"
+          disabled="{{item.disabled}}"
+          data-id="{{item.id}}"
+          bindtap="exchangeCoupon"
+        >
+          {{item.actionText}}
+        </button>
+        <button
+          class="delete-coupon-button"
+          data-id="{{item.id}}"
+          bindtap="deleteCoupon"
+        >
+          下架
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <view class="history-section">
+    <view class="section-title">最近兑换</view>
+    <view wx:if="{{exchanges.length === 0}}" class="card empty-card">
+      还没有兑换记录，喜欢的奖励可以慢慢攒。
+    </view>
+    <view wx:else class="exchange-list">
+      <view wx:for="{{exchanges}}" wx:key="id" class="card exchange-card">
+        <view class="exchange-left">
+          <view class="exchange-title">{{item.emoji}} {{item.title}}</view>
+          <view class="exchange-time">{{item.createdAtText}}</view>
+        </view>
+        <view class="exchange-cost">-{{item.cost}}</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,157 @@
+<sweet-nav title="双人盲投" show-back="{{true}}" />
+
+<view class="page blind-page">
+  <view class="card hero-card">
+    <view>
+      <view class="page-title">双人盲投 🙈</view>
+      <view class="page-subtitle">各自写下想吃的，等两个人都投完再揭晓。</view>
+    </view>
+    <view class="hero-lock">🔒</view>
+  </view>
+
+  <view wx:if="{{!currentVote}}" class="card create-card">
+    <view class="section-title">开启一次吃什么盲投</view>
+    <view class="create-hint">备选菜可以不填，两个人投票时也能自己输入。</view>
+
+    <view class="field">
+      <view class="field-label">主题</view>
+      <input
+        class="field-input"
+        value="{{form.title}}"
+        placeholder="默认：今晚吃什么？"
+        data-field="title"
+        bindinput="handleInput"
+      />
+    </view>
+
+    <view class="field">
+      <view class="field-label">备选菜</view>
+      <input
+        class="field-input"
+        value="{{form.options}}"
+        placeholder="例如：火锅, 寿司, 家里煮面"
+        data-field="options"
+        bindinput="handleInput"
+      />
+      <view class="field-hint">可选，用逗号分隔；投票时点一下可以快速填入。</view>
+    </view>
+
+    <button class="primary-action" bindtap="createVote">开始盲投</button>
+  </view>
+
+  <view wx:else class="vote-area">
+    <view class="card vote-card">
+      <view class="vote-top">
+        <view>
+          <view class="section-title">{{currentVote.title}}</view>
+          <view class="vote-subtitle">只有双方都提交后才会看到答案。</view>
+        </view>
+        <button class="reset-button" bindtap="resetCurrentVote">重置</button>
+      </view>
+
+      <view class="status-row">
+        <view wx:for="{{statusCards}}" wx:key="role" class="status-card {{item.done ? 'status-done' : ''}}">
+          <view class="status-role">{{item.role}}</view>
+          <view class="status-icon">{{item.done ? '💌' : '🤫'}}</view>
+          <view class="status-text">{{item.done ? '已投票' : '等待中'}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{!currentVote.revealed}}" class="card role-card">
+      <view class="section-title">先选择投票人</view>
+      <view class="role-row">
+        <button
+          class="role-button {{selectedRole === 'personA' ? 'role-active' : ''}}"
+          data-role="personA"
+          bindtap="selectRole"
+        >
+          我来投
+        </button>
+        <button
+          class="role-button {{selectedRole === 'personB' ? 'role-active' : ''}}"
+          data-role="personB"
+          bindtap="selectRole"
+        >
+          {{partnerName}}来投
+        </button>
+      </view>
+    </view>
+
+    <view wx:if="{{!currentVote.revealed && selectedRole && !selectedRoleHasVoted}}" class="card input-card">
+      <view class="input-header">
+        <view>
+          <view class="section-title">{{selectedRole === 'personA' ? '你' : partnerName}}想吃什么？</view>
+          <view class="input-subtitle">写完点提交，{{partnerName}}现在看不到你的答案。</view>
+        </view>
+        <view class="secret-chip">保密中</view>
+      </view>
+
+      <view wx:if="{{currentVote.options.length > 0}}" class="suggestion-list">
+        <button
+          wx:for="{{currentVote.options}}"
+          wx:key="*this"
+          class="suggestion-button"
+          data-option="{{item}}"
+          bindtap="fillChoiceFromOption"
+        >
+          {{item}}
+        </button>
+      </view>
+
+      <view class="field vote-field">
+        <input
+          class="field-input"
+          value="{{choiceForm.customOption}}"
+          placeholder="例如：想吃番茄牛肉意面"
+          bindinput="handleChoiceInput"
+        />
+      </view>
+
+      <button class="primary-action" bindtap="submitVote">悄悄提交</button>
+    </view>
+
+    <view wx:if="{{!currentVote.revealed && selectedRole && selectedRoleHasVoted}}" class="card gentle-card">
+      <view class="gentle-icon">💌</view>
+      <view class="gentle-title">你已经投好啦</view>
+      <view class="gentle-desc">现在只显示你已投票，答案会继续藏到另一个人也提交。</view>
+    </view>
+
+    <view wx:if="{{!currentVote.revealed && !selectedRole}}" class="card gentle-card">
+      <view class="gentle-icon">🤫</view>
+      <view class="gentle-title">答案先藏起来</view>
+      <view class="gentle-desc">选择投票人后再输入想吃的，{{partnerName}}只会看到投票状态。</view>
+    </view>
+
+    <view wx:if="{{currentVote.revealed}}" class="card reveal-card">
+      <view class="reveal-kicker">揭晓啦</view>
+      <view class="choice-row">
+        <view class="choice-card">
+          <view class="choice-role">你想吃</view>
+          <view class="choice-text">{{currentVote.votes.personA}}</view>
+        </view>
+        <view class="choice-card">
+          <view class="choice-role">{{partnerName}}想吃</view>
+          <view class="choice-text">{{currentVote.votes.personB}}</view>
+        </view>
+      </view>
+
+      <view class="final-message">{{finalMessage}}</view>
+
+      <view wx:if="{{currentVote.result}}" class="result-box">
+        <view class="result-label">最终决定</view>
+        <view class="result-text">{{currentVote.result}}</view>
+      </view>
+
+      <button
+        wx:if="{{currentVote.votes.personA !== currentVote.votes.personB && !currentVote.result}}"
+        class="primary-action {{isDeciding ? 'deciding' : ''}}"
+        loading="{{isDeciding}}"
+        disabled="{{isDeciding}}"
+        bindtap="decideWithWheel"
+      >
+        {{isDeciding ? '正在从两个答案里选...' : '用小转盘决定'}}
+      </button>
+    </view>
+  </view>
+</view>

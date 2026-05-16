@@ -1,0 +1,95 @@
+.add-dish-page {
+  padding-bottom: calc(150rpx + env(safe-area-inset-bottom));
+}
+
+.header-card {
+  border-radius: 46rpx;
+  background: linear-gradient(135deg, var(--color-card) 0%, var(--color-primary-light) 100%);
+}
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+  gap: 26rpx;
+  margin-top: 24rpx;
+  border-radius: 42rpx;
+  background: var(--color-card);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.field-label {
+  color: var(--color-text);
+  font-size: 28rpx;
+  font-weight: 800;
+}
+
+.field-input,
+.picker-box,
+.field-textarea {
+  width: 100%;
+  border: 1rpx solid rgba(255, 158, 187, 0.2);
+  border-radius: 30rpx;
+  background: var(--color-cream);
+  color: var(--color-text);
+  font-size: 27rpx;
+}
+
+.field-input,
+.picker-box {
+  min-height: 82rpx;
+  padding: 0 24rpx;
+  line-height: 82rpx;
+}
+
+.field-textarea {
+  min-height: 150rpx;
+  padding: 22rpx 24rpx;
+  line-height: 1.5;
+}
+
+.field-hint {
+  color: var(--color-muted);
+  font-size: 23rpx;
+}
+
+.action-row {
+  display: grid;
+  grid-template-columns: 180rpx minmax(0, 1fr);
+  gap: 18rpx;
+  margin-top: 28rpx;
+}
+
+.reset-button,
+.save-button {
+  display: flex;
+  min-height: 84rpx;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  font-weight: 800;
+  min-width: 0;
+}
+
+.reset-button {
+  border: 1rpx solid rgba(255, 158, 187, 0.32);
+  background: var(--color-card);
+  color: var(--color-text);
+}
+
+.save-button {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  box-shadow: 0 12rpx 24rpx rgba(255, 158, 187, 0.2);
+}
+
+@media (max-width: 340px) {
+  .action-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

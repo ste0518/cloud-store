@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "sweet-nav": "/components/sweet-nav/sweet-nav"
+  }
+}

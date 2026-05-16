@@ -1,0 +1,56 @@
+<sweet-nav title="心情签到" show-back="{{true}}" />
+
+<view class="page mood-page">
+  <view class="card mood-hero">
+    <view>
+      <view class="page-title">心情签到 🌤️</view>
+      <view class="page-subtitle">每天只选一个状态，让{{partnerName}}更容易照顾到你。</view>
+    </view>
+    <view class="today-chip">
+      <view class="today-day">{{todayDay}}</view>
+      <view class="today-label">{{todayMonth}}</view>
+    </view>
+  </view>
+
+  <button class="add-entry-button" bindtap="goAddMood">＋ 记录今日心情</button>
+
+  <view wx:if="{{recommendation}}" class="card recommendation-card">
+    <view class="recommendation-icon">{{recommendation.emoji}}</view>
+    <view class="recommendation-main">
+      <view class="recommendation-title">今天适合：{{recommendation.title}}</view>
+      <view class="recommendation-desc">{{recommendation.desc}}</view>
+      <view class="recommendation-tags">
+        <view wx:for="{{recommendation.actions}}" wx:key="*this" class="meta-pill">{{item}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">今日记录</view>
+    <view wx:if="{{todayCheckins.length === 0}}" class="card empty-card">
+      今天还没人签到，先留下一个小信号吧。
+    </view>
+    <view wx:else class="checkin-list">
+      <view wx:for="{{todayCheckins}}" wx:key="id" class="card checkin-item">
+        <view class="checkin-emoji">{{item.emoji}}</view>
+        <view class="checkin-main">
+          <view class="checkin-title">{{item.role}} · {{item.label}}</view>
+          <view class="checkin-note">{{item.note || "没有补充，但状态已经收到啦。"}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">最近心情</view>
+    <view wx:if="{{history.length === 0}}" class="card empty-card">
+      还没有历史记录，坚持几天后这里会很有用。
+    </view>
+    <view wx:else class="history-list">
+      <view wx:for="{{history}}" wx:key="id" class="history-row">
+        <view class="history-date">{{item.dateText}}</view>
+        <view class="history-body">{{item.emoji}} {{item.role}} · {{item.label}}</view>
+      </view>
+    </view>
+  </view>
+</view>

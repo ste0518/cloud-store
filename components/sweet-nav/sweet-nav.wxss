@@ -1,0 +1,36 @@
+.sweet-nav {
+  position: relative;
+  width: 100%;
+  height: calc(128rpx + env(safe-area-inset-top));
+  background: transparent;
+}
+
+.nav-title {
+  position: absolute;
+  right: 210rpx;
+  left: 210rpx;
+  overflow: hidden;
+  color: #2F2520;
+  font-size: 38rpx;
+  font-weight: 900;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav-back {
+  position: absolute;
+  left: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: transparent;
+  color: #2F2520;
+  font-size: 62rpx;
+  font-weight: 500;
+}
+
+.nav-back::after {
+  border: 0;
+}

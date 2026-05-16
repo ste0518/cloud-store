@@ -1,0 +1,12 @@
+<view class="sweet-nav" style="{{navStyle}}">
+  <button
+    wx:if="{{showBack}}"
+    class="nav-back"
+    style="{{backStyle}}"
+    aria-label="返回"
+    bindtap="handleBack"
+  >
+    ‹
+  </button>
+  <view class="nav-title" style="{{titleStyle}}">{{title}}</view>
+</view>

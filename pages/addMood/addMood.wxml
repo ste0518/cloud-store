@@ -1,0 +1,42 @@
+<sweet-nav title="记录心情" show-back="{{true}}" />
+
+<view class="page add-mood-page">
+  <view class="card hero-card">
+    <view class="page-title">今天的我 🌤️</view>
+    <view class="page-subtitle">每天只选一个状态，让{{partnerName}}更容易照顾到你。</view>
+  </view>
+
+  <view class="card checkin-card">
+    <view class="section-title">选择状态</view>
+    <view class="mood-grid">
+      <button
+        wx:for="{{moodOptions}}"
+        wx:key="value"
+        class="mood-option {{selectedMood === item.value ? 'mood-option-active' : ''}}"
+        data-value="{{item.value}}"
+        bindtap="selectMood"
+      >
+        <view class="mood-emoji">{{item.emoji}}</view>
+        <view class="mood-label">{{item.label}}</view>
+      </button>
+    </view>
+
+    <view class="field note-field">
+      <view class="field-label">补充一句</view>
+      <input class="field-input" value="{{note}}" placeholder="例如：今天有点累，想少做决定。" bindinput="handleNoteInput" />
+    </view>
+
+    <button class="submit-button" bindtap="saveMood">保存今日心情</button>
+  </view>
+
+  <view wx:if="{{recommendation}}" class="card recommendation-card">
+    <view class="recommendation-icon">{{recommendation.emoji}}</view>
+    <view class="recommendation-main">
+      <view class="recommendation-title">今天适合：{{recommendation.title}}</view>
+      <view class="recommendation-desc">{{recommendation.desc}}</view>
+      <view class="recommendation-tags">
+        <view wx:for="{{recommendation.actions}}" wx:key="*this" class="meta-pill">{{item}}</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,43 @@
+<sweet-nav title="纪念日" show-back="{{true}}" />
+
+<view class="page anniversary-page">
+  <view class="card anniversary-hero">
+    <view>
+      <view class="page-title">纪念日和倒计时 🗓️</view>
+      <view class="page-subtitle">把重要日子提前放在眼前，不让它悄悄溜走。</view>
+    </view>
+    <view wx:if="{{nearest}}" class="countdown-chip">
+      <view class="countdown-value">{{nearest.daysToNext}}</view>
+      <view class="countdown-label">天后</view>
+    </view>
+  </view>
+
+  <view wx:if="{{nearest}}" class="card nearest-card">
+    <view class="nearest-icon">{{nearest.icon}}</view>
+    <view class="nearest-main">
+      <view class="nearest-title">{{nearest.title}}</view>
+      <view class="nearest-desc">{{nearest.nextText}} · {{nearest.progressText}}</view>
+    </view>
+  </view>
+
+  <button class="add-entry-button" bindtap="goAddAnniversary">＋ 添加纪念日</button>
+
+  <view wx:if="{{items.length === 0}}" class="card empty-card anniversary-empty">
+    还没有纪念日，可以先添加“在一起的那天”。
+  </view>
+
+  <view wx:else class="anniversary-list">
+    <view wx:for="{{items}}" wx:key="id" class="card anniversary-card">
+      <view class="anniversary-icon">{{item.icon}}</view>
+      <view class="anniversary-main">
+        <view class="anniversary-top">
+          <view class="anniversary-title">{{item.title}}</view>
+          <view class="days-pill">{{item.daysToNextText}}</view>
+        </view>
+        <view class="anniversary-date">{{item.dateText}} · {{item.progressText}}</view>
+        <view wx:if="{{item.remark}}" class="anniversary-remark">{{item.remark}}</view>
+      </view>
+      <button class="delete-button" data-id="{{item.id}}" bindtap="deleteAnniversary">删除</button>
+    </view>
+  </view>
+</view>

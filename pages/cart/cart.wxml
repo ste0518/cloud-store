@@ -1,0 +1,91 @@
+<sweet-nav title="点单" />
+
+<view class="page cart-page">
+  <view class="card header-card">
+    <view>
+      <view class="page-title">今日点单 🧾</view>
+      <view class="page-subtitle">小篮子里装着今天的期待。</view>
+    </view>
+  </view>
+
+  <view class="card cloud-card">
+    <view class="cloud-main">
+      <view class="cloud-title">{{roleDisplayText}}</view>
+      <view class="cloud-desc">{{syncStatus}}</view>
+    </view>
+    <button class="role-button" bindtap="goRole">{{profile ? '切换' : '选择'}}</button>
+  </view>
+
+  <view wx:if="{{cartItems.length === 0}}" class="card empty-card">
+    <view class="empty-icon">🍽️</view>
+    <view class="empty-title">小篮子还是空的</view>
+    <view class="empty-desc">去菜单里挑一道想吃的吧。</view>
+    <button class="sweet-button menu-button" bindtap="goMenu">去菜单看看</button>
+  </view>
+
+  <view wx:else class="cart-section">
+    <view wx:for="{{cartItems}}" wx:key="id" class="card cart-card">
+      <view class="dish-icon">{{item.icon}}</view>
+      <view class="cart-main">
+        <view class="cart-title">{{item.name}}</view>
+        <view class="cart-desc">{{item.description}}</view>
+      </view>
+      <button class="remove-button" data-id="{{item.id}}" bindtap="removeCartItem">删除</button>
+    </view>
+
+    <view class="card notes-card">
+      <view class="section-title">温柔备注</view>
+      <textarea
+        class="notes-input"
+        value="{{notes}}"
+        placeholder="例如：多加芝士、不要太辣"
+        bindinput="handleNotesInput"
+      />
+    </view>
+
+    <button
+      class="submit-button {{!isCustomer ? 'submit-button-disabled' : ''}}"
+      loading="{{isSyncing}}"
+      disabled="{{isSyncing || !isCustomer}}"
+      bindtap="submitOrder"
+    >
+      <block wx:if="{{isCustomer}}">提交订单</block>
+      <block wx:else>等待{{partnerName}}点单</block>
+    </button>
+  </view>
+
+  <view class="orders-section">
+    <view class="section-title">最近订单</view>
+
+    <view wx:if="{{recentOrders.length === 0}}" class="card orders-empty">
+      还没有订单记录，第一单会很香。
+    </view>
+
+    <view wx:else class="order-list">
+      <view wx:for="{{recentOrders}}" wx:key="id" class="card order-card">
+        <view class="order-top">
+          <view class="order-title">{{item.itemsText}}</view>
+          <view class="status-badge status-{{item.status}}">{{item.statusText}}</view>
+        </view>
+        <view wx:if="{{item.customerText}}" class="order-notes">{{item.customerText}}</view>
+        <view wx:if="{{item.notes}}" class="order-notes">备注：{{item.notes}}</view>
+        <view class="order-info">
+          <text>{{item.createdAtText}}</text>
+        </view>
+
+        <view wx:if="{{item.canAccept || item.canOwnerCancel}}" class="order-actions">
+          <button wx:if="{{item.canAccept}}" class="accept-button" disabled="{{isSyncing}}" data-id="{{item.orderKey}}" bindtap="acceptOrder">接单</button>
+          <button wx:if="{{item.canOwnerCancel}}" class="cancel-button" disabled="{{isSyncing}}" data-id="{{item.orderKey}}" bindtap="cancelOrder">取消</button>
+        </view>
+
+        <view wx:if="{{item.canComplete}}" class="order-actions single">
+          <button class="complete-button" disabled="{{isSyncing}}" data-id="{{item.orderKey}}" bindtap="completeOrder">完成</button>
+        </view>
+
+        <view wx:if="{{item.canCustomerCancel}}" class="order-actions single">
+          <button class="cancel-button" disabled="{{isSyncing}}" data-id="{{item.orderKey}}" bindtap="cancelOrder">取消点单</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

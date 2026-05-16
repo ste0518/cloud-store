@@ -1,0 +1,175 @@
+<sweet-nav title="云朵币账本" show-back="{{true}}" />
+
+<view class="page ledger-page">
+  <view class="card balance-card">
+    <view>
+      <view class="page-title">云朵币账本 💗</view>
+      <view class="page-subtitle">把认真和偏爱都温柔记下来。</view>
+    </view>
+    <view class="balance-box">
+      <view class="balance-value">{{wallet.balance}}</view>
+      <view class="balance-label">云朵币</view>
+    </view>
+  </view>
+
+  <view class="card form-card">
+    <view class="section-title">手动记录</view>
+
+    <view class="form-grid">
+      <view class="field">
+        <view class="field-label">类型</view>
+        <picker
+          mode="selector"
+          range="{{typeOptions}}"
+          range-key="label"
+          value="{{form.typeIndex}}"
+          bindchange="handleTypeChange"
+        >
+          <view class="picker-box">{{typeOptions[form.typeIndex].label}}</view>
+        </picker>
+      </view>
+
+      <view class="field">
+        <view class="field-label">金额</view>
+        <input
+          class="field-input"
+          type="number"
+          value="{{form.amount}}"
+          placeholder="例如：5"
+          data-field="amount"
+          bindinput="handleInput"
+        />
+      </view>
+    </view>
+
+    <view class="field reason-field">
+      <view class="field-label">原因</view>
+      <input
+        class="field-input"
+        value="{{form.reason}}"
+        placeholder="例如：主动洗碗"
+        data-field="reason"
+        bindinput="handleInput"
+      />
+    </view>
+
+    <button class="submit-button" bindtap="submitManualRecord">记一笔</button>
+  </view>
+
+  <view class="card quick-form-card">
+    <view class="section-title">自定义快捷按钮</view>
+    <view class="form-grid">
+      <view class="field">
+        <view class="field-label">类型</view>
+        <picker
+          mode="selector"
+          range="{{typeOptions}}"
+          range-key="label"
+          value="{{quickActionForm.typeIndex}}"
+          bindchange="handleQuickTypeChange"
+        >
+          <view class="picker-box">{{typeOptions[quickActionForm.typeIndex].label}}</view>
+        </picker>
+      </view>
+
+      <view class="field">
+        <view class="field-label">金额</view>
+        <input
+          class="field-input"
+          type="number"
+          value="{{quickActionForm.amount}}"
+          placeholder="例如：5"
+          data-field="amount"
+          bindinput="handleQuickInput"
+        />
+      </view>
+    </view>
+
+    <view class="field reason-field">
+      <view class="field-label">按钮名称</view>
+      <input
+        class="field-input"
+        value="{{quickActionForm.reason}}"
+        placeholder="例如：主动洗碗"
+        data-field="reason"
+        bindinput="handleQuickInput"
+      />
+    </view>
+
+    <button class="submit-button soft-submit-button" bindtap="addQuickAction">添加快捷按钮</button>
+  </view>
+
+  <view class="quick-section">
+    <view class="section-title">快捷加分</view>
+    <view wx:if="{{quickEarnActions.length === 0}}" class="card empty-card quick-empty">
+      还没有加分快捷按钮，可以自己添加一个常用奖励。
+    </view>
+    <view wx:else class="quick-grid">
+      <view wx:for="{{quickEarnActions}}" wx:key="id" class="quick-action-card">
+        <button
+          class="quick-button earn-button"
+          data-type="earn"
+          data-amount="{{item.amount}}"
+          data-reason="{{item.reason}}"
+          bindtap="applyQuickAction"
+        >
+          {{item.reason}} +{{item.amount}}
+        </button>
+        <button
+          class="quick-delete-button"
+          data-type="earn"
+          data-id="{{item.id}}"
+          bindtap="deleteQuickAction"
+        >
+          删除
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <view class="quick-section">
+    <view class="section-title">快捷扣分</view>
+    <view wx:if="{{quickDeductActions.length === 0}}" class="card empty-card quick-empty">
+      还没有扣分快捷按钮，先约定好规则再添加也不迟。
+    </view>
+    <view wx:else class="quick-grid">
+      <view wx:for="{{quickDeductActions}}" wx:key="id" class="quick-action-card">
+        <button
+          class="quick-button deduct-button"
+          data-type="deduct"
+          data-amount="{{item.amount}}"
+          data-reason="{{item.reason}}"
+          bindtap="applyQuickAction"
+        >
+          {{item.reason}} -{{item.amount}}
+        </button>
+        <button
+          class="quick-delete-button"
+          data-type="deduct"
+          data-id="{{item.id}}"
+          bindtap="deleteQuickAction"
+        >
+          删除
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <view class="history-section">
+    <view class="section-title">积分历史</view>
+
+    <view wx:if="{{records.length === 0}}" class="card empty-card">
+      还没有记录，第一枚云朵币从今天开始。
+    </view>
+
+    <view wx:else class="record-list">
+      <view wx:for="{{records}}" wx:key="id" class="card record-card">
+        <view class="record-left">
+          <view class="record-reason">{{item.reason || item.title}}</view>
+          <view class="record-meta">{{item.typeText}} · {{item.createdAtText}}</view>
+        </view>
+        <view class="record-amount {{item.amountClass}}">{{item.signedAmount}}</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,87 @@
+<sweet-nav title="首页" />
+
+<view class="page index-page">
+  <view class="hero-card">
+    <view class="hero-control-row">
+      <view class="couple-dock">
+        <view
+          wx:for="{{coupleAvatars}}"
+          wx:key="role"
+          class="couple-chip {{item.hasJoined ? 'couple-chip-joined' : ''}} {{item.activityActive ? 'couple-chip-active' : ''}}"
+        >
+          <view class="couple-avatar-ring {{item.isMe ? 'couple-avatar-me' : ''}}">
+            <image wx:if="{{item.avatarUrl}}" class="couple-avatar-image" src="{{item.avatarUrl}}" mode="aspectFill" />
+            <view wx:else class="couple-avatar-initial">{{item.avatarInitial}}</view>
+            <view wx:if="{{item.activityActive}}" class="activity-dot"></view>
+          </view>
+          <view class="couple-chip-main">
+            <view class="couple-chip-top">
+              <text class="couple-name">{{item.nickname}}</text>
+              <text class="couple-role">{{item.isMe ? '我' : item.roleText}}</text>
+            </view>
+            <view class="activity-line">{{item.activityText}}</view>
+          </view>
+        </view>
+      </view>
+
+      <button class="hero-switch-button" bindtap="goRole">切换</button>
+    </view>
+
+    <view class="hero-top">
+      <view class="hero-title-block">
+        <view class="app-name">云朵小铺</view>
+        <view class="app-subtitle">今天想吃什么，偷偷加入小篮子吧</view>
+        <view class="bind-code-pill">
+          {{profile ? profile.coupleCode : '还没有绑定码'}}
+        </view>
+      </view>
+      <view class="hero-emoji">💗</view>
+    </view>
+
+    <view class="stats-row">
+      <view class="stat-card">
+        <view class="stat-value">{{walletBalance}}</view>
+        <view class="stat-label">云朵币</view>
+      </view>
+      <view class="stat-card">
+        <view class="stat-value">{{cartCount}}</view>
+        <view class="stat-label">今日点单</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">今日小空间</view>
+    <view class="life-summary-grid">
+      <button
+        wx:for="{{lifeSummary}}"
+        wx:key="title"
+        class="life-summary-card"
+        data-url="{{item.url}}"
+        bindtap="goPage"
+      >
+        <view class="life-summary-icon">{{item.icon}}</view>
+        <view class="life-summary-title">{{item.title}}</view>
+        <view class="life-summary-value">{{item.value}}</view>
+      </button>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">快捷入口</view>
+    <view class="entry-grid">
+      <button
+        wx:for="{{quickEntries}}"
+        wx:key="title"
+        class="entry-card"
+        data-url="{{item.url}}"
+        data-tab="{{item.tab}}"
+        bindtap="goPage"
+      >
+        <view class="entry-icon">{{item.icon}}</view>
+        <view class="entry-title">{{item.title}}</view>
+        <view class="entry-desc">{{item.desc}}</view>
+      </button>
+    </view>
+  </view>
+</view>

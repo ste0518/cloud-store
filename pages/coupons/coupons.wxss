@@ -1,0 +1,206 @@
+.coupons-page {
+  padding-bottom: calc(150rpx + env(safe-area-inset-bottom));
+}
+
+.coupons-hero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24rpx;
+  border-radius: 46rpx;
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--color-primary-light) 58%, var(--color-warm) 100%);
+}
+
+.wallet-chip {
+  flex: 0 0 150rpx;
+  padding: 18rpx 14rpx;
+  border-radius: 28rpx;
+  background: #FFFFFF;
+  text-align: center;
+  box-shadow: 0 10rpx 24rpx rgba(255, 158, 187, 0.12);
+}
+
+.wallet-value {
+  color: var(--color-primary);
+  font-size: 42rpx;
+  font-weight: 900;
+}
+
+.wallet-label {
+  color: var(--color-muted);
+  font-size: 23rpx;
+}
+
+.add-entry-button {
+  display: flex;
+  min-height: 78rpx;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20rpx;
+  border-radius: 999rpx;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-size: 27rpx;
+  font-weight: 900;
+  box-shadow: var(--shadow-pink);
+}
+
+.coupon-list,
+.exchange-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+  margin-top: 24rpx;
+}
+
+.coupon-card {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  padding: 24rpx;
+  border-radius: 38rpx;
+}
+
+.coupon-icon {
+  display: flex;
+  width: 78rpx;
+  height: 78rpx;
+  flex: 0 0 78rpx;
+  align-items: center;
+  justify-content: center;
+  border-radius: 26rpx;
+  background: var(--color-primary-light);
+  font-size: 42rpx;
+  box-shadow: 0 8rpx 0 rgba(255, 158, 187, 0.16);
+}
+
+.coupon-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.coupon-title,
+.exchange-title {
+  color: var(--color-text);
+  font-size: 29rpx;
+  font-weight: 900;
+}
+
+.coupon-desc,
+.exchange-time {
+  margin-top: 6rpx;
+  color: var(--color-muted);
+  font-size: 24rpx;
+}
+
+.coupon-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-top: 14rpx;
+}
+
+.meta-pill {
+  padding: 7rpx 13rpx;
+  border-radius: 999rpx;
+  background: var(--color-warm);
+  color: var(--color-text);
+  font-size: 22rpx;
+  font-weight: 800;
+}
+
+.exchange-button {
+  display: flex;
+  min-height: 68rpx;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999rpx;
+  background: var(--color-primary);
+  color: #FFFFFF;
+  font-size: 25rpx;
+  font-weight: 900;
+  box-shadow: var(--shadow-pink);
+  min-width: 0;
+}
+
+.coupon-actions {
+  display: flex;
+  flex: 0 0 126rpx;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.exchange-button-disabled {
+  background: rgba(74, 59, 53, 0.08);
+  color: var(--color-muted);
+  box-shadow: none;
+}
+
+.delete-coupon-button {
+  display: flex;
+  min-height: 58rpx;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid rgba(255, 158, 187, 0.36);
+  border-radius: 999rpx;
+  background: var(--color-card);
+  color: var(--color-muted);
+  font-size: 23rpx;
+  font-weight: 800;
+}
+
+.coupon-empty {
+  margin-top: 24rpx;
+}
+
+.history-section {
+  margin-top: 34rpx;
+}
+
+.empty-card {
+  margin-top: 16rpx;
+}
+
+.exchange-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18rpx;
+  padding: 24rpx;
+}
+
+@media (max-width: 340px) {
+  .coupons-hero,
+  .coupon-card,
+  .exchange-card {
+    gap: 14rpx;
+  }
+
+  .coupon-card {
+    display: grid;
+    grid-template-columns: 78rpx minmax(0, 1fr);
+  }
+
+  .coupon-actions {
+    grid-column: 1 / -1;
+    width: 100%;
+    flex-basis: auto;
+    flex-direction: row;
+  }
+
+  .exchange-button,
+  .delete-coupon-button {
+    flex: 1;
+  }
+}
+
+.exchange-left {
+  min-width: 0;
+  flex: 1;
+}
+
+.exchange-cost {
+  color: var(--color-text);
+  font-size: 32rpx;
+  font-weight: 900;
+}

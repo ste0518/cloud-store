@@ -1,0 +1,64 @@
+<sweet-nav title="添加菜品" show-back="{{true}}" />
+
+<view class="page add-dish-page">
+  <view class="card header-card">
+    <view class="page-title">添加菜品 ➕</view>
+    <view class="page-subtitle">把拿手菜收进两个人的小菜单。</view>
+  </view>
+
+  <view class="card form-card">
+    <view class="field">
+      <view class="field-label">菜名</view>
+      <input
+        class="field-input"
+        value="{{form.name}}"
+        placeholder="例如：番茄牛肉意面"
+        data-field="name"
+        bindinput="handleInput"
+      />
+    </view>
+
+    <view class="field">
+      <view class="field-label">emoji 图标</view>
+      <input
+        class="field-input"
+        value="{{form.icon}}"
+        placeholder="例如：🍝"
+        data-field="icon"
+        bindinput="handleInput"
+      />
+    </view>
+
+    <view class="field">
+      <view class="field-label">分类</view>
+      <picker
+        mode="selector"
+        range="{{dishCategories}}"
+        range-key="label"
+        value="{{form.categoryIndex}}"
+        bindchange="handleCategoryChange"
+      >
+        <view class="picker-box">
+          {{dishCategories[form.categoryIndex].label}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="field">
+      <view class="field-label">描述</view>
+      <textarea
+        class="field-textarea"
+        value="{{form.description}}"
+        placeholder="写一句让人想点它的描述"
+        data-field="description"
+        bindinput="handleInput"
+      />
+    </view>
+
+  </view>
+
+  <view class="action-row">
+    <button class="reset-button" bindtap="resetForm">轻轻清空</button>
+    <button class="save-button" bindtap="saveDish">保存菜品</button>
+  </view>
+</view>

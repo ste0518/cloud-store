@@ -1,0 +1,9 @@
+{
+  "desc": "云朵小铺 Sweet Order sitemap",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "*"
+    }
+  ]
+}

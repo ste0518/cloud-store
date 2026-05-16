@@ -1,0 +1,66 @@
+{
+  "pages": [
+    "pages/role/role",
+    "pages/index/index",
+    "pages/menu/menu",
+    "pages/addDish/addDish",
+    "pages/cart/cart",
+    "pages/coupons/coupons",
+    "pages/addCoupon/addCoupon",
+    "pages/random/random",
+    "pages/blindVote/blindVote",
+    "pages/ledger/ledger",
+    "pages/album/album",
+    "pages/addAlbum/addAlbum",
+    "pages/anniversary/anniversary",
+    "pages/addAnniversary/addAnniversary",
+    "pages/mood/mood",
+    "pages/addMood/addMood",
+    "pages/tasks/tasks",
+    "pages/addTask/addTask",
+    "pages/coupleProfile/coupleProfile"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#FFF8F2",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FFF8F2",
+    "backgroundTextStyle": "dark"
+  },
+  "usingComponents": {
+    "sweet-nav": "/components/sweet-nav/sweet-nav"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#4A3B35",
+    "selectedColor": "#FF9EBB",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/menu/menu",
+        "text": "菜单"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "点单"
+      },
+      {
+        "pagePath": "pages/coupons/coupons",
+        "text": "奖券"
+      },
+      {
+        "pagePath": "pages/random/random",
+        "text": "决策"
+      }
+    ]
+  },
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}

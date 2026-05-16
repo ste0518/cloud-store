@@ -1,0 +1,63 @@
+<sweet-nav title="今天吃什么" />
+
+<view class="page decision-page">
+  <view class="card hero-card">
+    <view>
+      <view class="page-title">今天吃什么 🎡</view>
+      <view class="page-subtitle">不想纠结的时候，就让小转盘从菜单里挑一道。</view>
+    </view>
+    <view class="hero-badge">
+      <view class="hero-badge-value">{{dishCount}}</view>
+      <view class="hero-badge-label">道菜</view>
+    </view>
+  </view>
+
+  <view class="card wheel-card">
+    <view class="wheel-header">
+      <view>
+        <view class="section-title">随机一道菜</view>
+        <view class="wheel-subtitle">范围：我的菜单</view>
+      </view>
+      <button class="small-soft-button" bindtap="goAddDish">加菜</button>
+    </view>
+
+    <view class="wheel-wrap {{isSpinning ? 'wheel-spinning' : ''}}">
+      <view class="wheel-pointer"></view>
+      <view class="wheel-core">🍽️</view>
+      <view class="wheel-text">{{isSpinning ? '正在挑...' : '开饭选择器'}}</view>
+    </view>
+
+    <button
+      class="start-button {{isSpinning ? 'start-button-loading' : ''}}"
+      loading="{{isSpinning}}"
+      disabled="{{isSpinning}}"
+      bindtap="startRandom"
+    >
+      {{isSpinning ? '让我想想...' : '随机吃什么'}}
+    </button>
+  </view>
+
+  <view wx:if="{{result}}" class="card result-card result-pop">
+    <view class="result-kicker">今晚可以吃</view>
+    <view class="result-content">
+      <view class="result-icon">{{result.icon}}</view>
+      <view class="result-title">{{result.name}}</view>
+      <view class="result-desc">{{result.description || '这道菜已经在小菜单里等你啦。'}}</view>
+      <button class="result-button" bindtap="addDishToCart">加入今日点单</button>
+    </view>
+  </view>
+
+  <view wx:elif="{{!isSpinning}}" class="card empty-card decision-empty">
+    <view class="empty-icon">✨</view>
+    <view class="empty-title">结果会出现在这里</view>
+    <view class="empty-desc">菜单里有菜之后，就可以直接随机决定晚饭。</view>
+  </view>
+
+  <view class="vote-entry">
+    <view class="entry-text">
+      <view class="section-title">还是想两个人各自选？</view>
+      <view class="entry-desc">用双人盲投，两个人先悄悄写想吃的，投完再揭晓。</view>
+    </view>
+    <button class="vote-entry-button" bindtap="goBlindVote">去盲投</button>
+  </view>
+</view>
